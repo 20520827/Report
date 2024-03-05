@@ -24,6 +24,7 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Bill.h"
+#include "Enemy.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -60,6 +61,7 @@
 
 CMario* mario = NULL;
 CBill* bill = NULL;
+CEnemy* enemy = NULL;
 
 CSampleKeyHandler* keyHandler;
 
@@ -126,10 +128,12 @@ void LoadResources()
 	ani = new CAnimation(100);
 	ani->Add(9001);
 	animations->Add(ID_ANI_BILL_IDLE_RIGHT, ani);
+	animations->Add(ID_ANI_ENEMY_IDLE_RIGHT, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(9002);
 	animations->Add(ID_ANI_BILL_IDLE_LEFT, ani);
+	animations->Add(ID_ANI_ENEMY_IDLE_LEFT, ani);
 
 	ani = new CAnimation(150);
 	ani->Add(9011);
@@ -139,6 +143,7 @@ void LoadResources()
 	ani->Add(9015);
 	ani->Add(9016);
 	animations->Add(ID_ANI_BILL_WALKING_RIGHT, ani);
+	animations->Add(ID_ANI_ENEMY_WALKING_RIGHT, ani);
 
 	ani = new CAnimation(150);
 	ani->Add(9021);
@@ -148,19 +153,24 @@ void LoadResources()
 	ani->Add(9025);
 	ani->Add(9026);
 	animations->Add(ID_ANI_BILL_WALKING_LEFT, ani);
+	animations->Add(ID_ANI_ENEMY_WALKING_LEFT, ani);
 
 	ani = new CAnimation(450);
 	ani->Add(9031);
 	ani->Add(9032);
 	animations->Add(ID_ANI_BILL_WALKING_UP, ani);
+	animations->Add(ID_ANI_ENEMY_WALKING_UP, ani);
 
 	ani = new CAnimation(450);
 	ani->Add(9041);
 	ani->Add(9042);
 	animations->Add(ID_ANI_BILL_WALKING_DOWN, ani);
+	animations->Add(ID_ANI_ENEMY_WALKING_DOWN, ani);
 
 	bill = new CBill(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(bill);
+	enemy = new CEnemy(100.0f, 150.0f);
+	objects.push_back(enemy);
 	
 	//LPTEXTURE texMario = textures->Get(ID_TEX_MARIO);
 
@@ -270,7 +280,7 @@ void LoadResources()
 	//objects.push_back(mario);
 
 	// Brick objects 
-	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
+	/*LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_BRICK, 372, 153, 372+15, 153+15, texMisc);
 
 	ani = new CAnimation(100);
@@ -281,7 +291,7 @@ void LoadResources()
 	{
 		CBrick* b = new CBrick(BRICK_X + i * BRICK_WIDTH, BRICK_Y);
 		objects.push_back(b);
-	}
+	}*/
 }
 
 /*

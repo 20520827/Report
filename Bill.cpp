@@ -7,6 +7,8 @@ void CBill::Update(DWORD dt)
 
 	if (vx > 0 && x > 300) x = 300;
 	if (vx < 0 && x < 5) x = 5;
+	if (vy > 0 && y > 185) y = 185;
+	if (vy < 0 && y < 15) y = 15;
 }
 
 void CBill::Render()
@@ -36,6 +38,8 @@ void CBill::Render()
 			aniId = ID_ANI_BILL_IDLE_RIGHT;
 		}
 		break;
+	default:
+		aniId = ID_ANI_BILL_IDLE_RIGHT;
 	}
 	animations->Get(aniId)->Render(x, y);
 }
