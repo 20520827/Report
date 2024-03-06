@@ -36,7 +36,13 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPTEXTURE tex
 	}
 	else
 	{
-		D3DXMatrixScaling(&this->matScaling, (FLOAT)spriteWidth, (FLOAT)spriteHeight, 1.0f);
+		if (spriteHeight < 0)
+		{
+			D3DXMatrixScaling(&this->matScaling, (FLOAT)spriteWidth, -(FLOAT)spriteHeight, 1.0f);
+		}
+		else {
+			D3DXMatrixScaling(&this->matScaling, (FLOAT)spriteWidth, (FLOAT)spriteHeight, 1.0f);
+		}
 	}
 	
 }
