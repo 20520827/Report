@@ -41,7 +41,6 @@
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
-#define ID_TEX_BILL 30
 
 #define ID_TEX_BILL 555
 
@@ -50,7 +49,7 @@
 #define TEXTURES_DIR L"textures"
 #define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario.png"
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\misc.png"
-#define TEXTURE_PATH_BILL TEXTURES_DIR "\\Players.png"
+#define TEXTURE_PATH_BILL TEXTURES_DIR "\\Players_no_bg.png"
 
 #define MARIO_START_X 200.0f
 #define MARIO_START_Y 50.0f
@@ -96,6 +95,80 @@ void LoadResources()
 	CSprites * sprites = CSprites::GetInstance();
 	CAnimations * animations = CAnimations::GetInstance();
 
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_BILL);
+	//IDLE RIGHT AND LEFT
+	sprites->Add(8001, 546, 292, 569, 327, texEnemy);
+	sprites->Add(8002, 569, 292, 546, 327, texEnemy);
+
+	//ENEMY WALKING RIGHT
+	sprites->Add(8011, 25, 292, 43, 327, texEnemy);
+	sprites->Add(8012, 90, 293, 109, 326, texEnemy);
+	sprites->Add(8013, 157, 292, 172, 327, texEnemy);
+	sprites->Add(8014, 220, 292, 237, 327, texEnemy);
+	sprites->Add(8015, 285, 293, 304, 326, texEnemy);
+	sprites->Add(8016, 353, 292, 368, 327, texEnemy);
+
+	//ENEMY WALKING LEFT
+	sprites->Add(8021, 43, 292, 25, 327, texEnemy);
+	sprites->Add(8022, 109, 293, 90, 326, texEnemy);
+	sprites->Add(8023, 172, 292, 157, 327, texEnemy);
+	sprites->Add(8024, 237, 292, 220, 327, texEnemy);
+	sprites->Add(8025, 304, 293, 285, 326, texEnemy);
+	sprites->Add(8026, 368, 292, 353, 327, texEnemy);
+
+	//ENEMY WALKING UP
+	sprites->Add(8031, 673, 489, 693, 529, texEnemy);
+	sprites->Add(8032, 739, 491, 759, 531, texEnemy);
+											  
+	//ENEMY WALKING DOWN						  
+	sprites->Add(8041, 693, 529, 673, 489, texEnemy);
+	sprites->Add(8042, 759, 531, 739, 491, texEnemy);
+
+	ani = new CAnimation(100);
+	ani->Add(8001);
+	animations->Add(ID_ANI_ENEMY_IDLE_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(8002);
+	animations->Add(ID_ANI_ENEMY_IDLE_LEFT, ani);
+
+	ani = new CAnimation(150);
+	ani->Add(8011);
+	ani->Add(8012);
+	ani->Add(8013);
+	ani->Add(8014);
+	ani->Add(8015);
+	ani->Add(8016);
+	animations->Add(ID_ANI_ENEMY_WALKING_RIGHT, ani);
+
+	ani = new CAnimation(150);
+	ani->Add(8021);
+	ani->Add(8022);
+	ani->Add(8023);
+	ani->Add(8024);
+	ani->Add(8025);
+	ani->Add(8026);
+	animations->Add(ID_ANI_ENEMY_WALKING_LEFT, ani);
+
+	ani = new CAnimation(450);
+	ani->Add(8031);
+	ani->Add(8032);
+	animations->Add(ID_ANI_ENEMY_WALKING_UP, ani);
+
+	ani = new CAnimation(450);
+	ani->Add(8041);
+	ani->Add(8042);
+	animations->Add(ID_ANI_ENEMY_WALKING_DOWN, ani);
+
+	enemy = new CEnemy(100.0f, 150.0f);
+	objects.push_back(enemy);
+
+
+
+
+
+
+
 	LPTEXTURE texBill = textures->Get(ID_TEX_BILL);
 	//IDLE RIGHT AND LEFT
 	sprites->Add(9001, 546, 24, 569, 59, texBill);
@@ -128,12 +201,10 @@ void LoadResources()
 	ani = new CAnimation(100);
 	ani->Add(9001);
 	animations->Add(ID_ANI_BILL_IDLE_RIGHT, ani);
-	animations->Add(ID_ANI_ENEMY_IDLE_RIGHT, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(9002);
 	animations->Add(ID_ANI_BILL_IDLE_LEFT, ani);
-	animations->Add(ID_ANI_ENEMY_IDLE_LEFT, ani);
 
 	ani = new CAnimation(150);
 	ani->Add(9011);
@@ -143,7 +214,6 @@ void LoadResources()
 	ani->Add(9015);
 	ani->Add(9016);
 	animations->Add(ID_ANI_BILL_WALKING_RIGHT, ani);
-	animations->Add(ID_ANI_ENEMY_WALKING_RIGHT, ani);
 
 	ani = new CAnimation(150);
 	ani->Add(9021);
@@ -153,24 +223,19 @@ void LoadResources()
 	ani->Add(9025);
 	ani->Add(9026);
 	animations->Add(ID_ANI_BILL_WALKING_LEFT, ani);
-	animations->Add(ID_ANI_ENEMY_WALKING_LEFT, ani);
 
 	ani = new CAnimation(450);
 	ani->Add(9031);
 	ani->Add(9032);
 	animations->Add(ID_ANI_BILL_WALKING_UP, ani);
-	animations->Add(ID_ANI_ENEMY_WALKING_UP, ani);
 
 	ani = new CAnimation(450);
 	ani->Add(9041);
 	ani->Add(9042);
 	animations->Add(ID_ANI_BILL_WALKING_DOWN, ani);
-	animations->Add(ID_ANI_ENEMY_WALKING_DOWN, ani);
 
 	bill = new CBill(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(bill);
-	enemy = new CEnemy(100.0f, 150.0f);
-	objects.push_back(enemy);
 	
 	//LPTEXTURE texMario = textures->Get(ID_TEX_MARIO);
 
